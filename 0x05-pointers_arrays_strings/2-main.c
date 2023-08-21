@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 /**
- * main - check the code
- *
- * Return: Always 0.
+ * _strlen - returns the length of a string
+ * @str: string to be processed
+ * Return: lenth of string
  */
 int main(void)
 {

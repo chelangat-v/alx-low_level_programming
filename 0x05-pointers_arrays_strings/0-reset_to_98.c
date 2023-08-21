@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * Author: Vicky Chelangat
- * File: reset_to_98
- * Description: Takes a pointer to an int as parameter and resets the value it points to 98
- * @n: number to be processed
+ * reset_to_98 - takes a pointer to an int as parameter and updates
+ * the value it points to
+ * to 98
+ * @n: number to be processe
  */
 void reset_to_98(int *n)
 {
