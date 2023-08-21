@@ -1,11 +1,9 @@
 #include "main.h"
 
 /**
- * Author: Vicky Chelangat
- * File: 2-strlen.c
- * Description: returns the length of a string
+ * _strlen - returns the length of a string
  * @str: string to be processed
- * Return: length of string
+ * Return: lenth of string
  */
 int _strlen(char *str)
 {
