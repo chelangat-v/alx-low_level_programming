@@ -1,43 +1,32 @@
-#include "atoi.h"
+#include "main.h"
 /**
- * print_number - prints number
- * @n:integer to convert to character
- *
+ * _atoi - converts a string to an integer.
+ * @s: the string to convert
+ * Return: the converted string.
  */
-void print_number(int n)
+int _atoi(char *s)
 {
-	unsigned int abs;
-	int mult = 1;
-	unsigned int abSCount;
-	int i;
-	int c = 0;
+	short boolean;
+	int i, minus, result;
 
-	if (n == 0)
-	{
-		_putchar('0');
-	}
-	if (n < 0)
-	{
-		_putchar('-');
-		n += 1;
-		n *= -1;
-		n++;
-	}
-	abs = n;
-	abSCount = n;
+	i = minus = result = boolean = 0;
+	minus = -1;
 
-	while (abSCount > 0)
+	while (s[i] != '\0')
 	{
-		abSCount /= 10;
-		c++;
-	}
-	for (i = 0; i < c - 1; i++)
-		mult *= 10;
+		if (s[i] == '-')
+			minus *= -1;
 
-	for (i = 0; i < c; i++)
-	{
-		_putchar((abs / mult) + '0');
-		abs = abs % mult;
-		mult /= 10;
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			result *= 10;
+			result -= (s[i] - '0');
+			boolean = 1;
+		}
+		else if (boolean == 1)
+			break;
+		i++;
 	}
+	result *= minus;
+	return (result);
 }
