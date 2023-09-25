@@ -1,32 +1,44 @@
 #include "lists.h"
+#include "free_helper.c"
 
 /**
- * find_listint_loop - look for loops in list
- * @head: first node
- * Return: address of loop or NULL
+ * free_listint_safe - free linked list
+ * @h: first node
+ * Return: no. of nodes freed
  */
 
-listint_t *find_listint_loop(listint_t *head)
+size_t free_listint_safe(listint_t **h)
 {
-	listint_t *tmp_node1 = head, *tmp_node2 = head;
+	size_t i = 0;
+	listp_t *ptr, *new_node, *tmp_node;
+	listint_t *current;
 
-	while (tmp_node1 && tmp_node2 && tmp_node2->next)
+	ptr = NULL;
+	while (*h != NULL)
 	{
-		tmp_node1 = tmp_node1->next;
-		tmp_node2 = tmp_node2->next->next;
-		if (tmp_node1 == tmp_node2)
+		new_node = malloc(sizeof(listp_t));
+		if (new_node == NULL)
+			exit(98);
+		new_node->p = (void *)*h;
+		new_node->next = ptr;
+		ptr = new_node;
+		tmp_node = ptr;
+		while (tmp_node->next != NULL)
 		{
-			tmp_node1 = head;
-			break;
+			tmp_node = tmp_node->next;
+			if (*h == tmp_node->p)
+			{
+				*h = NULL;
+				free_helper(&ptr);
+				return (i);
+			}
 		}
+		current = *h;
+		*h = (*h)->next;
+		free(current);
+		i++;
 	}
-	if (!tmp_node1 || !tmp_node2 || !tmp_node2->next)
-		return (NULL);
-
-	while (tmp_node1 != tmp_node2)
-	{
-		tmp_node1 = tmp_node1->next;
-		tmp_node2 = tmp_node2->next;
-	}
-	return (tmp_node2);
+	*h = NULL;
+	free_helper(&ptr);
+	return (i);
 }
